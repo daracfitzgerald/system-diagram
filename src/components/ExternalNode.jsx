@@ -3,7 +3,11 @@ import { Handle, Position } from '@xyflow/react';
 
 function ExternalNode({ data }) {
   const [showTooltip, setShowTooltip] = useState(false);
-  const { label, icon, tooltip } = data;
+  const { label, icon, tooltip, position } = data;
+  const isTopRow = position && position.y < 100;
+  const posStyle = isTopRow
+    ? { top: '100%', marginTop: 4 }
+    : { bottom: '100%', marginBottom: 4 };
 
   return (
     <div
@@ -14,7 +18,7 @@ function ExternalNode({ data }) {
       {showTooltip && (
         <div style={{
           position: 'absolute',
-          bottom: '100%',
+          ...posStyle,
           left: '50%',
           transform: 'translateX(-50%)',
           background: '#1a1a2e',
@@ -28,7 +32,6 @@ function ExternalNode({ data }) {
           zIndex: 1000,
           pointerEvents: 'none',
           boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-          marginBottom: 4,
         }}>
           {tooltip}
         </div>

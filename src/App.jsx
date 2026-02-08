@@ -18,7 +18,7 @@ const nodeTypes = { system: SystemNode, external: ExternalNode };
 const edgeDefaults = {
   style: { stroke: '#4a4a7a', strokeWidth: 1.5 },
   markerEnd: { type: MarkerType.ArrowClosed, color: '#4a4a7a', width: 15, height: 15 },
-  labelStyle: { fill: '#8080a0', fontSize: 10, fontWeight: 500 },
+  labelStyle: { fill: '#a0a0c0', fontSize: 11, fontWeight: 500 },
   labelBgStyle: { fill: '#0d0d18', fillOpacity: 0.9 },
   labelBgPadding: [6, 3],
   labelBgBorderRadius: 4,
@@ -37,6 +37,9 @@ const handleMap = {
   'e-lg-kb': { sourceHandle: 'right-source', targetHandle: 'left-target' },
   'e-mac-vault': { sourceHandle: 'left-source', targetHandle: 'right-target' },
   'e-ollama-mi': { sourceHandle: null, targetHandle: null },
+  'e-oc-vault': { sourceHandle: 'left-source', targetHandle: 'right-target' },
+  'e-kb-vercel': { sourceHandle: null, targetHandle: null },
+  'e-oc-anthropic': { sourceHandle: 'left-source', targetHandle: 'right-source' },
 };
 
 function App() {
@@ -58,6 +61,7 @@ function App() {
       position: n.position,
       data: {
         ...n,
+        position: n.position,
         expanded: expandedNodes.has(n.id),
         onToggle: () => toggleNode(n.id),
       },
@@ -66,7 +70,7 @@ function App() {
       id: n.id,
       type: 'external',
       position: n.position,
-      data: n,
+      data: { ...n, position: n.position },
     }));
     return [...sysNodes, ...extNodes];
   }, [expandedNodes, toggleNode]);

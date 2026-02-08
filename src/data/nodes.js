@@ -8,7 +8,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'The central AI assistant running on a VPS. Handles all user interactions via Telegram, orchestrates tasks across the entire system, and maintains persistent memory. This is the brain of the operation.',
     icon: '🧠',
-    position: { x: 400, y: 50 },
+    position: { x: 350, y: 50 },
     children: [
       { id: 'oc-model', label: 'Claude Opus 4.6', status: 'online', tooltip: 'The primary LLM powering all reasoning and responses. Opus is Anthropic\'s most capable model — chosen for complex multi-step tasks, code generation, and nuanced conversation.' },
       { id: 'oc-telegram', label: 'Telegram Channel', status: 'online', tooltip: 'The primary user interface. All conversations with Dara happen here. Supports text, voice messages (transcribed via Whisper), images, and inline buttons.' },
@@ -26,7 +26,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'A multi-agent orchestration layer running on the VPS. Routes complex tasks to specialist agents with appropriate model tiers. Only accessible via Tailscale (not exposed to public internet).',
     icon: '🔀',
-    position: { x: 50, y: 300 },
+    position: { x: 80, y: 250 },
     children: [
       { id: 'lg-agents', label: '5 Specialist Agents', status: 'online', tooltip: 'Dev (code generation/review), Research (web research/analysis), Docs (documentation/writing), Security (audits/hardening), QA (testing/verification). Each has tailored system prompts and tool access.' },
       { id: 'lg-routing', label: 'Model Routing', status: 'online', tooltip: 'Gemini Flash classifier analyzes each task and routes to the appropriate model tier: Flash (simple/fast), Sonnet (balanced), Opus (complex). Optimizes cost and speed without sacrificing quality.' },
@@ -40,7 +40,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'A custom-built task management board deployed on Vercel. Both Dara and the AI agents use it to track work. Provides visibility into what\'s planned, in progress, and done.',
     icon: '📋',
-    position: { x: 800, y: 300 },
+    position: { x: 620, y: 250 },
     children: [
       { id: 'kb-nextjs', label: 'Next.js App', status: 'online', tooltip: 'Full-stack Next.js application hosted at kanban.darafitzgerald.co.uk. Server-side rendering, API routes for agent access, and a responsive drag-and-drop UI.' },
       { id: 'kb-supabase', label: 'Supabase Realtime', status: 'online', tooltip: 'PostgreSQL database with real-time subscriptions. When the agent updates a task via API, the browser UI updates instantly — no refresh needed.' },
@@ -55,7 +55,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'A rich knowledge base in Obsidian (markdown files with metadata). Synced between Mac, GitHub, and VPS via git. Contains curated collections of books, recipes, tech notes, and more.',
     icon: '📚',
-    position: { x: 150, y: 550 },
+    position: { x: 120, y: 430 },
     children: [
       { id: 'v-gitsync', label: 'Git Sync', status: 'online', tooltip: 'Three-way sync: Mac (Obsidian app) ↔ GitHub (central repo) ↔ VPS (agent access). Changes from any location propagate to all others. Conflict resolution via git merge.' },
       { id: 'v-clipper', label: 'Web Clipper (11 templates)', status: 'online', tooltip: 'Browser extension that saves web content into the vault with structured metadata. 11 templates: Books, YouTube, IMDB, Recipes, GitHub repos, Articles, and more. Each template extracts relevant fields automatically.' },
@@ -70,7 +70,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'The underlying VPS infrastructure that hosts OpenClaw and supporting services. Secured behind Tailscale mesh network with UFW firewall rules.',
     icon: '🖥️',
-    position: { x: 450, y: 550 },
+    position: { x: 350, y: 430 },
     children: [
       { id: 'vps-tailscale', label: 'Tailscale (100.69.233.8)', status: 'online', tooltip: 'WireGuard-based mesh VPN connecting VPS, Mac, and any other devices. All inter-device communication travels over encrypted Tailscale tunnels. IP: 100.69.233.8.' },
       { id: 'vps-ufw', label: 'UFW Firewall', status: 'online', tooltip: 'Uncomplicated Firewall with default-deny policy. Only Tailscale traffic is allowed in. Public ports are blocked. Defense in depth alongside Tailscale\'s own encryption.' },
@@ -86,7 +86,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'Dara\'s Mac computer, paired as a remote node. The agent can execute commands on it via node control — accessing Google Workspace tools, local CLIs, and the Obsidian app.',
     icon: '💻',
-    position: { x: 750, y: 550 },
+    position: { x: 580, y: 430 },
     children: [
       { id: 'mac-gog', label: 'gog CLI', status: 'online', tooltip: 'Google Workspace CLI: Drive (list/upload/download), Gmail (search/read/send), Calendar (events/create), Docs, Sheets. The agent\'s gateway to Google services via the Mac.' },
       { id: 'mac-gdocs', label: 'gdocs-edit.mjs', status: 'online', tooltip: 'Custom script for Google Docs editing: read, create, append, insert, delete, replace operations. More precise than the gog CLI for document manipulation.' },
@@ -104,12 +104,12 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'A semantic search system that indexes all of Dara\'s knowledge sources (vault, kanban, memory files, session logs) into a vector database. Enables the agent to find relevant context by meaning, not just keywords.',
     icon: '🔍',
-    position: { x: 400, y: 800 },
+    position: { x: 350, y: 600 },
     children: [
       { id: 'mi-memquery', label: 'memquery CLI', status: 'online', tooltip: 'Command-line tool for searching the index: search (semantic + keyword), sync (update index), stats (index health), reindex (full rebuild). The agent\'s primary search interface.' },
       { id: 'mi-lancedb', label: 'LanceDB + Ollama', status: 'online', tooltip: 'LanceDB is a lightweight vector database storing embeddings generated by Ollama\'s mxbai-embed-large model. Fast local similarity search without external API dependencies.' },
       { id: 'mi-search', label: 'Hybrid Search', status: 'online', tooltip: 'Combines vector similarity (semantic meaning) with keyword matching (exact terms). Hybrid approach catches both conceptually related and literally matching content.' },
-      { id: 'mi-sources', label: 'Sources (1870 chunks)', status: 'online', tooltip: 'Indexed content: vault (1776 chunks from Obsidian notes), kanban (50 tasks), memory (20 daily notes), sessions (24 conversation logs). Covers all knowledge sources.' },
+      { id: 'mi-sources', label: 'Sources (1883 chunks)', status: 'online', tooltip: 'Indexed content: vault (1776 chunks from Obsidian notes), kanban (50 tasks), memory (20 daily notes), sessions (24 conversation logs). Covers all knowledge sources.' },
       { id: 'mi-index', label: 'Index Storage', status: 'online', tooltip: 'Stored at ~/.openclaw/memindex/lancedb/. Lightweight on-disk format. Can be fully rebuilt from source files via memquery reindex.' },
     ]
   },
@@ -127,11 +127,16 @@ export const systemEdges = [
   { id: 'e-lg-kb', source: 'langgraph', target: 'kanban', label: 'Agent updates', tooltip: 'LangGraph specialist agents update kanban tasks with progress, results, and status changes as they work through delegated tasks.' },
   { id: 'e-mac-vault', source: 'mac', target: 'vault', label: 'Obsidian app', tooltip: 'Dara uses the Obsidian desktop app on Mac to browse and edit the vault. Changes are committed and pushed via git sync.' },
   { id: 'e-ollama-mi', source: 'vps', target: 'memindex', label: 'Embeddings', tooltip: 'Ollama running on VPS generates vector embeddings via mxbai-embed-large model. Memindex sends text chunks to Ollama and stores the resulting vectors in LanceDB.' },
+  { id: 'e-oc-vault', source: 'openclaw', target: 'vault', label: 'File access', tooltip: 'OpenClaw reads and writes Obsidian vault markdown files directly on the VPS filesystem. Used for memory updates, note creation, and knowledge base queries.' },
+  { id: 'e-kb-vercel', source: 'kanban', target: 'vercel-ext', label: 'Hosted on', tooltip: 'The Kanban Next.js application is deployed and hosted on Vercel. Automatic deployments from the GitHub repository on every push.' },
+  { id: 'e-oc-anthropic', source: 'openclaw', target: 'anthropic-ext', label: 'LLM calls', tooltip: 'All Claude model inference runs through the Anthropic API. Every message, tool use, and reasoning step is an API call to Anthropic\'s servers.', animated: true },
 ];
 
 // External service nodes (not expandable)
 export const externalNodes = [
-  { id: 'telegram-ext', label: 'Telegram', icon: '💬', position: { x: 400, y: -100 }, tooltip: 'Telegram messaging platform. The user-facing interface for all interactions with the AI assistant. Chosen for its rich bot API, inline buttons, and cross-platform availability.' },
-  { id: 'github-ext', label: 'GitHub', icon: '🐙', position: { x: 0, y: 450 }, tooltip: 'GitHub repository hosting the Obsidian vault. Acts as the central sync point between Mac, VPS, and any other devices. Also hosts project repositories.' },
-  { id: 'supabase-ext', label: 'Supabase', icon: '⚡', position: { x: 1050, y: 300 }, tooltip: 'Supabase provides the PostgreSQL database and realtime subscriptions for the Kanban board. Hosted service — no database management needed.' },
+  { id: 'telegram-ext', label: 'Telegram', icon: '💬', position: { x: 350, y: -80 }, tooltip: 'Telegram messaging platform. The user-facing interface for all interactions with the AI assistant. Chosen for its rich bot API, inline buttons, and cross-platform availability.' },
+  { id: 'github-ext', label: 'GitHub', icon: '🐙', position: { x: 0, y: 380 }, tooltip: 'GitHub repository hosting the Obsidian vault. Acts as the central sync point between Mac, VPS, and any other devices. Also hosts project repositories.' },
+  { id: 'supabase-ext', label: 'Supabase', icon: '⚡', position: { x: 850, y: 250 }, tooltip: 'Supabase provides the PostgreSQL database and realtime subscriptions for the Kanban board. Hosted service — no database management needed.' },
+  { id: 'vercel-ext', label: 'Vercel', icon: '▲', position: { x: 770, y: 150 }, tooltip: 'Vercel hosts the Kanban board Next.js application. Provides edge deployment, automatic previews, and seamless CI/CD from the GitHub repository.' },
+  { id: 'anthropic-ext', label: 'Anthropic API', icon: '🤖', position: { x: 130, y: 50 }, tooltip: 'Anthropic\'s Claude API — the LLM provider powering OpenClaw. All reasoning, code generation, and conversation runs through this API. Critical external dependency.' },
 ];

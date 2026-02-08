@@ -16,8 +16,11 @@ const StatusDot = ({ status }) => (
   />
 );
 
-const Tooltip = ({ text, children }) => {
+const Tooltip = ({ text, children, flipBelow }) => {
   const [show, setShow] = useState(false);
+  const posStyle = flipBelow
+    ? { top: '100%', marginTop: 4 }
+    : { bottom: '100%', marginBottom: 4 };
   return (
     <div
       style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', width: '100%' }}
@@ -28,7 +31,7 @@ const Tooltip = ({ text, children }) => {
       {show && (
         <div style={{
           position: 'absolute',
-          bottom: '100%',
+          ...posStyle,
           left: '50%',
           transform: 'translateX(-50%)',
           background: '#1a1a2e',
@@ -42,7 +45,6 @@ const Tooltip = ({ text, children }) => {
           zIndex: 1000,
           pointerEvents: 'none',
           boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
-          marginBottom: 4,
         }}>
           {text}
         </div>
@@ -69,22 +71,33 @@ const ChildItem = ({ child }) => (
 );
 
 function SystemNode({ data }) {
-  const { label, subtitle, icon, status, tooltip, children, expanded, onToggle } = data;
+  const { label, subtitle, icon, status, tooltip, children, expanded, onToggle, position } = data;
   const hasChildren = children && children.length > 0;
+  const [hovered, setHovered] = useState(false);
+  const isTopRow = position && position.y < 100;
+
+  const borderColor = expanded ? '#6366f180' : hovered ? '#6366f160' : '#2a2a4a';
+  const shadow = expanded
+    ? '0 0 20px #6366f120'
+    : hovered
+      ? '0 0 15px #6366f115'
+      : '0 2px 10px rgba(0,0,0,0.3)';
 
   return (
-    <Tooltip text={tooltip}>
+    <Tooltip text={tooltip} flipBelow={isTopRow}>
       <div
         onClick={(e) => { e.stopPropagation(); if (hasChildren) onToggle(); }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{
           background: 'linear-gradient(135deg, #16162a 0%, #1a1a35 100%)',
-          border: `1px solid ${expanded ? '#6366f180' : '#2a2a4a'}`,
+          border: `1px solid ${borderColor}`,
           borderRadius: 12,
-          padding: expanded ? '12px 16px' : '12px 16px',
+          padding: '12px 16px',
           minWidth: expanded ? 220 : 180,
           maxWidth: 260,
           cursor: hasChildren ? 'pointer' : 'default',
-          boxShadow: expanded ? '0 0 20px #6366f120' : '0 2px 10px rgba(0,0,0,0.3)',
+          boxShadow: shadow,
           transition: 'all 0.2s ease',
         }}
       >
