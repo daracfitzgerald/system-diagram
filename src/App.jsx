@@ -116,7 +116,7 @@ function App() {
         gap: 4,
       }}>
         <h1 style={{ fontSize: 18, fontWeight: 700, color: '#e0e0f0', letterSpacing: '-0.5px' }}>
-          🚀 Dara's AI System
+          🏗️ OpenClaw System Architecture
         </h1>
         <p style={{ fontSize: 11, color: '#6060a0' }}>Click nodes to expand • Hover for details</p>
       </div>
