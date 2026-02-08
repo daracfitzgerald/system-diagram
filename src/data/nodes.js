@@ -8,7 +8,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'The central AI assistant running on a VPS. Handles all user interactions via Telegram, orchestrates tasks across the entire system, and maintains persistent memory. This is the brain of the operation.',
     icon: '🧠',
-    position: { x: 280, y: 20 },
+    position: { x: 300, y: 0 },
     children: [
       { id: 'oc-model', label: 'Claude Opus 4.6', status: 'online', tooltip: 'The primary LLM powering all reasoning and responses. Opus is Anthropic\'s most capable model — chosen for complex multi-step tasks, code generation, and nuanced conversation.' },
       { id: 'oc-telegram', label: 'Telegram Channel', status: 'online', tooltip: 'The primary user interface. All conversations with Dara happen here. Supports text, voice messages (transcribed via Whisper), images, and inline buttons.' },
@@ -27,7 +27,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'A multi-agent orchestration layer running on the VPS. Routes complex tasks to specialist agents with appropriate model tiers. Supplementary to the primary orchestration pipeline (Claude Code CLI). Only accessible via Tailscale.',
     icon: '🔀',
-    position: { x: 280, y: 240 },
+    position: { x: 300, y: 340 },
     children: [
       { id: 'lg-agents', label: '5 Specialist Agents', status: 'online', tooltip: 'Dev (code generation/review), Research (web research/analysis), Docs (documentation/writing), Security (audits/hardening), QA (testing/verification). Each has tailored system prompts and tool access.' },
       { id: 'lg-routing', label: 'Model Routing', status: 'online', tooltip: 'Gemini Flash classifier analyses each task and routes to the appropriate model tier: Flash (simple/fast), Sonnet (balanced), Opus (complex). Optimises cost and speed without sacrificing quality.' },
@@ -41,7 +41,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'A custom-built task management board deployed on Vercel. Both Dara and the AI agents use it to track work. Provides visibility into what\'s planned, in progress, and done.',
     icon: '📋',
-    position: { x: 570, y: 20 },
+    position: { x: 650, y: 0 },
     children: [
       { id: 'kb-nextjs', label: 'Next.js App', status: 'online', tooltip: 'Full-stack Next.js application hosted at kanban.darafitzgerald.co.uk. Server-side rendering, API routes for agent access, and a responsive drag-and-drop UI.' },
       { id: 'kb-supabase', label: 'Supabase Realtime', status: 'online', tooltip: 'PostgreSQL database with real-time subscriptions. When the agent updates a task via API, the browser UI updates instantly — no refresh needed.' },
@@ -56,7 +56,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'A rich knowledge base in Obsidian (markdown files with metadata). Synced between Mac, GitHub, and VPS via git. Contains curated collections of books, recipes, tech notes, system inventory, decision log, and more.',
     icon: '📚',
-    position: { x: 850, y: 20 },
+    position: { x: 1020, y: 0 },
     children: [
       { id: 'v-gitsync', label: 'Git Sync', status: 'online', tooltip: 'Three-way sync: Mac (Obsidian app) ↔ GitHub (central repo) ↔ VPS (agent access). Changes from any location propagate to all others. Conflict resolution via git merge.' },
       { id: 'v-clipper', label: 'Web Clipper (11 templates)', status: 'online', tooltip: 'Browser extension that saves web content into the vault with structured metadata. 11 templates: Books, YouTube, IMDB, Recipes, GitHub repos, Articles, and more. Each template extracts relevant fields automatically.' },
@@ -73,7 +73,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'The underlying VPS infrastructure that hosts OpenClaw and supporting services. Secured behind Tailscale mesh network with UFW firewall rules.',
     icon: '🖥️',
-    position: { x: 420, y: 400 },
+    position: { x: 500, y: 600 },
     children: [
       { id: 'vps-tailscale', label: 'Tailscale (100.69.233.8)', status: 'online', tooltip: 'WireGuard-based mesh VPN connecting VPS, Mac, and any other devices. All inter-device communication travels over encrypted Tailscale tunnels. IP: 100.69.233.8.' },
       { id: 'vps-ufw', label: 'UFW Firewall', status: 'online', tooltip: 'Uncomplicated Firewall with default-deny policy. Only Tailscale traffic is allowed in. Public ports are blocked. Defence in depth alongside Tailscale\'s own encryption.' },
@@ -90,7 +90,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'Dara\'s Mac computer, paired as a remote node. The agent can execute commands on it via node control — accessing Google Workspace tools, local CLIs, and the Obsidian app.',
     icon: '💻',
-    position: { x: 850, y: 240 },
+    position: { x: 1020, y: 340 },
     children: [
       { id: 'mac-gog', label: 'gog CLI', status: 'online', tooltip: 'Google Workspace CLI: Drive (list/upload/download), Gmail (search/read/send), Calendar (events/create), Docs, Sheets. The agent\'s gateway to Google services via the Mac.' },
       { id: 'mac-gdocs', label: 'gdocs-edit.mjs', status: 'online', tooltip: 'Custom script for Google Docs editing: read, create, append, insert, delete, replace operations. More precise than the gog CLI for document manipulation.' },
@@ -108,7 +108,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'A semantic search system that indexes all of Dara\'s knowledge sources (vault, kanban, memory files, session logs) into a vector database. Enables the agent to find relevant context by meaning, not just keywords.',
     icon: '🔍',
-    position: { x: 570, y: 240 },
+    position: { x: 650, y: 340 },
     children: [
       { id: 'mi-memquery', label: 'memquery CLI', status: 'online', tooltip: 'Command-line tool for searching the index: search (semantic + keyword), sync (update index), stats (index health), reindex (full rebuild). The agent\'s primary search interface.' },
       { id: 'mi-lancedb', label: 'LanceDB + Ollama', status: 'online', tooltip: 'LanceDB is a lightweight vector database storing embeddings generated by Ollama\'s mxbai-embed-large model. Fast local similarity search without external API dependencies.' },
@@ -124,7 +124,7 @@ export const systemNodes = [
     status: 'online',
     tooltip: 'Real-time voice conversation app using Google\'s Gemini Live API (native audio model). Deployed on Vercel. Supports bidirectional voice streaming — like a phone call with AI. Connected to OpenClaw via the Voice Bridge relay.',
     icon: '🎙️',
-    position: { x: 30, y: 350 },
+    position: { x: 30, y: 450 },
     children: [
       { id: 'vc-gemini', label: 'Gemini Live (native-audio)', status: 'online', tooltip: 'Uses gemini-2.5-flash-native-audio-latest model via bidiGenerateContent WebSocket API. Streams audio bidirectionally for real-time voice conversation. ~£0.03/min.' },
       { id: 'vc-functions', label: 'Function Declarations (6)', status: 'online', tooltip: 'Six function declarations: create_task, run_batch, check_status, search, build, send_message. When Gemini detects an action intent, it fires a function call to the Voice Bridge relay.' },
@@ -156,10 +156,10 @@ export const systemEdges = [
 
 // External service nodes (not expandable)
 export const externalNodes = [
-  { id: 'telegram-ext', label: 'Telegram', icon: '💬', position: { x: 30, y: 50 }, tooltip: 'Telegram messaging platform. The user-facing interface for all interactions with the AI assistant. Chosen for its rich bot API, inline buttons, and cross-platform availability.' },
-  { id: 'github-ext', label: 'GitHub', icon: '🐙', position: { x: 30, y: 200 }, tooltip: 'GitHub repository hosting the Obsidian vault and project repos (kanban board, voice chat, system diagram). Acts as the central sync point.' },
-  { id: 'supabase-ext', label: 'Supabase', icon: '⚡', position: { x: 1130, y: 50 }, tooltip: 'Supabase provides the PostgreSQL database and realtime subscriptions for the Kanban board. Hosted service — no database management needed.' },
-  { id: 'vercel-ext', label: 'Vercel', icon: '▲', position: { x: 1130, y: 180 }, tooltip: 'Vercel hosts the Kanban board and Voice Chat applications. Provides edge deployment, automatic previews, and CI/CD. Deploy hooks used as workaround for broken auto-deploy webhooks.' },
-  { id: 'anthropic-ext', label: 'Anthropic API', icon: '🤖', position: { x: 1130, y: 310 }, tooltip: 'Anthropic\'s Claude API — the LLM provider powering OpenClaw. All reasoning, code generation, and conversation runs through this API. Critical external dependency.' },
-  { id: 'gemini-ext', label: 'Google Gemini', icon: '✨', position: { x: 30, y: 480 }, tooltip: 'Google\'s Gemini API powering the voice chat (Live native audio model) and model routing classification (Flash). Also used for image generation fallback via the Mac gemini CLI.' },
+  { id: 'telegram-ext', label: 'Telegram', icon: '💬', position: { x: 30, y: 30 }, tooltip: 'Telegram messaging platform. The user-facing interface for all interactions with the AI assistant. Chosen for its rich bot API, inline buttons, and cross-platform availability.' },
+  { id: 'github-ext', label: 'GitHub', icon: '🐙', position: { x: 30, y: 220 }, tooltip: 'GitHub repository hosting the Obsidian vault and project repos (kanban board, voice chat, system diagram). Acts as the central sync point.' },
+  { id: 'supabase-ext', label: 'Supabase', icon: '⚡', position: { x: 1350, y: 30 }, tooltip: 'Supabase provides the PostgreSQL database and realtime subscriptions for the Kanban board. Hosted service — no database management needed.' },
+  { id: 'vercel-ext', label: 'Vercel', icon: '▲', position: { x: 1350, y: 200 }, tooltip: 'Vercel hosts the Kanban board and Voice Chat applications. Provides edge deployment, automatic previews, and CI/CD. Deploy hooks used as workaround for broken auto-deploy webhooks.' },
+  { id: 'anthropic-ext', label: 'Anthropic API', icon: '🤖', position: { x: 1350, y: 370 }, tooltip: 'Anthropic\'s Claude API — the LLM provider powering OpenClaw. All reasoning, code generation, and conversation runs through this API. Critical external dependency.' },
+  { id: 'gemini-ext', label: 'Google Gemini', icon: '✨', position: { x: 30, y: 640 }, tooltip: 'Google\'s Gemini API powering the voice chat (Live native audio model) and model routing classification (Flash). Also used for image generation fallback via the Mac gemini CLI.' },
 ];
