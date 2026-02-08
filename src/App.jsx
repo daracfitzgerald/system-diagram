@@ -1,11 +1,13 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   ReactFlow,
+  ReactFlowProvider,
   Background,
   Controls,
   MiniMap,
   useNodesState,
   useEdgesState,
+  useReactFlow,
   MarkerType,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
@@ -94,6 +96,14 @@ function App() {
     []
   );
 
+  const { fitView } = useReactFlow();
+
+  useEffect(() => {
+    const handleResize = () => fitView({ padding: 0.2 });
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [fitView]);
+
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#0a0a0f' }}>
       <div style={{
@@ -132,4 +142,12 @@ function App() {
   );
 }
 
-export default App;
+function AppWithProvider() {
+  return (
+    <ReactFlowProvider>
+      <App />
+    </ReactFlowProvider>
+  );
+}
+
+export default AppWithProvider;
