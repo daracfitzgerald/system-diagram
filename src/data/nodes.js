@@ -18,6 +18,8 @@ export const systemNodes = [
       { id: 'oc-sessions', label: 'Session Management', status: 'online', tooltip: 'Supports main session + isolated sub-agent sessions. Sub-agents handle focused tasks (research, builds, reviews) without polluting the main conversation context.' },
       { id: 'oc-tools', label: 'Tools', status: 'online', tooltip: 'Built-in tooling: web search (Brave API), web fetch (URL→markdown), browser automation (Playwright), node control (run commands on paired devices). Extends the agent beyond text.' },
       { id: 'oc-orchestrate', label: 'Orchestration Pipeline', status: 'online', tooltip: 'Concept-to-launch pipeline using Claude Code CLI. OpenClaw picks tasks from the kanban, invokes Claude Code on the VPS to build/execute, then moves tasks through QA. Triggered on demand via batch skill.' },
+      { id: 'oc-alerts', label: 'Alerting System', status: 'online', tooltip: 'Systemd timer runs every 30 minutes checking: service health (OpenClaw, voice bridge), stuck kanban tasks (>24h in progress), disk space (>80%). Sends alerts via Telegram. Deduplicates within 6 hours.' },
+      { id: 'oc-metrics', label: 'Observability', status: 'online', tooltip: 'JSONL-based logging and metrics. daily-metrics.sh analyses session logs (token usage, costs, success rates). log-orchestration.sh tracks Claude Code pipeline invocations. Outputs Telegram-friendly summaries.' },
     ]
   },
   {
@@ -47,6 +49,7 @@ export const systemNodes = [
       { id: 'kb-supabase', label: 'Supabase Realtime', status: 'online', tooltip: 'PostgreSQL database with real-time subscriptions. When the agent updates a task via API, the browser UI updates instantly — no refresh needed.' },
       { id: 'kb-api', label: 'Agent API', status: 'online', tooltip: 'REST API authenticated via X-Agent-API-Key header. Agents can create tasks, add comments, claim work, create subtasks, and move tasks through columns programmatically.' },
       { id: 'kb-columns', label: 'Workflow Columns', status: 'online', tooltip: 'Backlog → To Do → In Progress → QA → Done. Strict workflow: agents move tasks through columns properly, never skip steps. QA column ensures review before completion.' },
+      { id: 'kb-search', label: 'Search & Filter', status: 'online', tooltip: 'Real-time search bar filtering tasks across titles, descriptions, tags, and comments. Non-matching tasks are dimmed rather than hidden, preserving board structure.' },
     ]
   },
   {
@@ -80,7 +83,9 @@ export const systemNodes = [
       { id: 'vps-ollama', label: 'Ollama + mxbai-embed-large', status: 'online', tooltip: 'Local embedding model server. Runs mxbai-embed-large for generating vector embeddings used by Memindex. Keeps embedding generation fast and free (no API costs).' },
       { id: 'vps-claude', label: 'Claude Code CLI', status: 'online', tooltip: 'Authenticated Claude Code CLI (v2.1.37, Claude Max). Used by the orchestration pipeline to build and execute tasks autonomously. Requires PTY wrapper (script -qec).' },
       { id: 'vps-systemd', label: 'Systemd Services', status: 'online', tooltip: 'Managed services: openclaw (the gateway daemon) and langgraph-orchestrator. Both auto-restart on failure and start on boot.' },
-      { id: 'vps-voicebridge', label: 'Voice Bridge (port 5052)', status: 'online', tooltip: 'Fastify relay server connecting Gemini Live voice chat to OpenClaw. Receives function calls from Gemini (create_task, run_batch, search, build, send_message) and forwards them as Telegram messages to OpenClaw for execution. Tailscale only.' },
+      { id: 'vps-voicebridge', label: 'Voice Bridge (port 5052)', status: 'online', tooltip: 'Fastify relay server connecting Gemini Live voice chat to OpenClaw. Receives function calls from Gemini (create_task, run_batch, search, build, send_message) and forwards them as Telegram messages to OpenClaw for execution. Systemd service, auto-restarts.' },
+      { id: 'vps-demos', label: 'Demo Pipeline', status: 'online', tooltip: 'Automated demo video generation using Playwright (live browser recording), OpenAI TTS (narration), and ffmpeg (video production). Choreographed scripts sync narration to on-screen actions.' },
+      { id: 'vps-alerts', label: 'Alert Timer', status: 'online', tooltip: 'Systemd timer running alert-check.sh every 30 minutes. Monitors service health, stuck tasks, and disk space. Sends deduplicated alerts via Telegram.' },
     ]
   },
   {
@@ -129,6 +134,8 @@ export const systemNodes = [
       { id: 'vc-gemini', label: 'Gemini Live (native-audio)', status: 'online', tooltip: 'Uses gemini-2.5-flash-native-audio-latest model via bidiGenerateContent WebSocket API. Streams audio bidirectionally for real-time voice conversation. ~£0.03/min.' },
       { id: 'vc-functions', label: 'Function Declarations (6)', status: 'online', tooltip: 'Six function declarations: create_task, run_batch, check_status, search, build, send_message. When Gemini detects an action intent, it fires a function call to the Voice Bridge relay.' },
       { id: 'vc-context', label: 'System Context', status: 'online', tooltip: 'System instruction includes USER.md, MEMORY.md, and SOUL.md — giving the voice assistant the same knowledge and personality as the text-based agent.' },
+      { id: 'vc-bridge', label: 'Voice Bridge Relay', status: 'online', tooltip: 'Fastify server on VPS port 5052 (systemd service). Receives function calls from Gemini, forwards to Telegram as commands. Supports feedback loop: OpenClaw posts results back, app polls and feeds them to Gemini as tool responses.' },
+      { id: 'vc-feedback', label: 'Feedback Loop', status: 'online', tooltip: 'Full round-trip: Gemini calls function → relay forwards to OpenClaw → OpenClaw processes → posts result to relay /result endpoint → app polls every 3s → sends tool response to Gemini → Gemini speaks the result.' },
     ]
   },
 ];
