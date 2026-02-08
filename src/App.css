@@ -1,0 +1,13 @@
+/* React Flow overrides for dark theme */
+.react-flow__controls button {
+  background: #16162a !important;
+  border: 1px solid #2a2a4a !important;
+  color: #8080a0 !important;
+  fill: #8080a0 !important;
+}
+.react-flow__controls button:hover {
+  background: #1e1e3a !important;
+}
+.react-flow__edge-textbg {
+  fill: #0d0d18 !important;
+}
