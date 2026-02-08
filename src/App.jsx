@@ -126,15 +126,7 @@ function App() {
           style={{ background: '#16162a', border: '1px solid #2a2a4a', borderRadius: 8 }}
           showInteractive={false}
         />
-        <MiniMap
-          style={{ background: '#0d0d18', border: '1px solid #2a2a4a', borderRadius: 8, width: 160, height: 120 }}
-          nodeColor={(node) => node.type === 'external' ? '#8b5cf6' : '#6366f1'}
-          nodeStrokeColor={() => '#2a2a4a'}
-          nodeStrokeWidth={1}
-          maskColor="rgba(0,0,0,0.7)"
-          zoomable
-          pannable
-        />
+        {/* MiniMap removed - not rendering properly */}
       </ReactFlow>
     </div>
   );
