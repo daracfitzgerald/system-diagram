@@ -11,3 +11,10 @@
 .react-flow__edge-textbg {
   fill: #0d0d18 !important;
 }
+/* MiniMap fixes */
+.react-flow__minimap {
+  background: #0d0d18 !important;
+}
+.react-flow__minimap svg {
+  display: block;
+}

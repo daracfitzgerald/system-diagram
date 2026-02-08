@@ -41,6 +41,10 @@ const handleMap = {
   'e-oc-vault': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // OpenClaw → Vault (centre-left → centre-right)
   'e-kb-vercel': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Kanban → Vercel (centre → right)
   'e-oc-anthropic': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // OpenClaw → Anthropic (centre-left → right)
+  'e-vc-bridge': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Voice Chat → VPS (left → centre)
+  'e-vc-gemini': { sourceHandle: null, targetHandle: null }, // Voice Chat → Gemini (vertical)
+  'e-bridge-telegram': { sourceHandle: 'left-source', targetHandle: null }, // VPS → Telegram (centre → left)
+  'e-oc-claude': { sourceHandle: null, targetHandle: null }, // OpenClaw → VPS (vertical)
 };
 
 function App() {
@@ -123,9 +127,13 @@ function App() {
           showInteractive={false}
         />
         <MiniMap
-          style={{ background: '#0d0d18', border: '1px solid #2a2a4a', borderRadius: 8 }}
-          nodeColor={() => '#6366f1'}
+          style={{ background: '#0d0d18', border: '1px solid #2a2a4a', borderRadius: 8, width: 160, height: 120 }}
+          nodeColor={(node) => node.type === 'external' ? '#8b5cf6' : '#6366f1'}
+          nodeStrokeColor={() => '#2a2a4a'}
+          nodeStrokeWidth={1}
           maskColor="rgba(0,0,0,0.7)"
+          zoomable
+          pannable
         />
       </ReactFlow>
     </div>
