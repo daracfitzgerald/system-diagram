@@ -136,11 +136,7 @@ function App() {
           style={{ background: '#16162a', border: '1px solid #2a2a4a', borderRadius: 8 }}
           showInteractive={false}
         />
-        <MiniMap
-          nodeColor={(n) => n.data?.color || '#4a4a7a'}
-          maskColor="rgba(0,0,0,0.7)"
-          style={{ background: '#0d0d18', border: '1px solid #2a2a4a', borderRadius: 8 }}
-        />
+        {/* MiniMap removed - not rendering properly */}
       </ReactFlow>
     </div>
   );
