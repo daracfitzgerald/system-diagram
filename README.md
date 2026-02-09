@@ -1,16 +1,33 @@
-# React + Vite
+# Dara's AI System Diagram
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interactive system architecture diagram built with React Flow. Visualises all components of Dara's AI system - OpenClaw, kanban board, Obsidian vault, voice bridge, and supporting infrastructure.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Interactive node graph with expandable sub-components
+- Hover tooltips with component details
+- Status indicators (green = active, amber = in progress)
+- Responsive layout with auto-fit on resize
+- Dark theme
 
-## React Compiler
+## Live
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Public**: https://diagram.darafitzgerald.co.uk
+- **Tailscale**: http://100.69.233.8:5051
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React + Vite
+- React Flow
+- Deployed on Vercel
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Data
+
+Node and edge definitions in `src/data/nodes.js`. Add new system components there.
