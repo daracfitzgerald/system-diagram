@@ -29,24 +29,24 @@ const edgeDefaults = {
 // Custom handle mapping for cleaner edge routing
 // Handle mapping for left-to-right data flow layout
 const handleMap = {
-  'e-oc-telegram': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Telegram → OpenClaw (left → centre-left)
-  'e-oc-lg': { sourceHandle: null, targetHandle: null }, // OpenClaw ↔ LangGraph (vertical, same column)
-  'e-oc-kb': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // OpenClaw → Kanban (centre-left → centre)
-  'e-oc-mac': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // OpenClaw → Mac (centre-left → centre-right)
-  'e-oc-mi': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // OpenClaw → Memindex (centre-left → centre)
+  'e-oc-telegram': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Telegram → Borgella (left → centre-left)
+  'e-oc-lg': { sourceHandle: null, targetHandle: null }, // Borgella ↔ LangGraph (vertical, same column)
+  'e-oc-kb': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Borgella → Kanban (centre-left → centre)
+  'e-oc-mac': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Borgella → Mac (centre-left → centre-right)
+  'e-oc-mi': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Borgella → Memindex (centre-left → centre)
   'e-vault-github': { sourceHandle: 'left-source', targetHandle: 'right-source' }, // Vault → GitHub (centre-right → left)
   'e-github-vps': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // GitHub → VPS (left → centre)
   'e-kb-supa': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Kanban → Supabase (centre → right)
   'e-lg-kb': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // LangGraph → Kanban (centre-left → centre)
   'e-mac-vault': { sourceHandle: null, targetHandle: null }, // Mac ↔ Vault (vertical, same column)
-  'e-ollama-mi': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // VPS → Memindex (centre → centre)
-  'e-oc-vault': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // OpenClaw → Vault (centre-left → centre-right)
+  'e-openai-mi': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // VPS → Memindex (centre → centre)
+  'e-oc-vault': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Borgella → Vault (centre-left → centre-right)
   'e-kb-vercel': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Kanban → Vercel (centre → right)
-  'e-oc-anthropic': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // OpenClaw → Anthropic (centre-left → right)
+  'e-oc-anthropic': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Borgella → Anthropic (centre-left → right)
   'e-vc-bridge': { sourceHandle: 'right-source', targetHandle: 'left-target' }, // Voice Chat → VPS (left → centre)
   'e-vc-gemini': { sourceHandle: null, targetHandle: null }, // Voice Chat → Gemini (vertical)
   'e-bridge-telegram': { sourceHandle: 'left-source', targetHandle: null }, // VPS → Telegram (centre → left)
-  'e-oc-claude': { sourceHandle: null, targetHandle: null }, // OpenClaw → VPS (vertical)
+  'e-oc-claude': { sourceHandle: null, targetHandle: null }, // Borgella → VPS (vertical)
 };
 
 function App() {
