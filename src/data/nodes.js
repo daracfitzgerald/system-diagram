@@ -12,6 +12,7 @@ export const systemNodes = [
     children: [
       { id: 'oc-model', label: 'Claude Opus 4', status: 'online', tooltip: 'The primary LLM powering all reasoning and responses. Opus is Anthropic\'s most capable model — chosen for complex multi-step tasks, code generation, and nuanced conversation.' },
       { id: 'oc-telegram', label: 'Telegram Channel', status: 'online', tooltip: 'The primary user interface. All conversations with Dara happen here. Supports text, voice messages (transcribed via Whisper), images, and inline buttons.' },
+      { id: 'oc-slack', label: 'Slack Agent (borgella-slack)', status: 'online', tooltip: 'Secondary agent instance operating in the Measurelab Slack workspace (The Bridge). Isolated sessions with scoped access — can only reference system wiki, Measurelab Toolkit, and channel content. Never exposes personal vault or memory.' },
       { id: 'oc-skills', label: 'Skills System (20+)', status: 'online', tooltip: 'Modular capability system — each skill is a focused tool: batch operations, kanban management, memory read/write, obsidian vault editing, orchestration, research, weather, GitHub, and more. Skills are loaded contextually.' },
       { id: 'oc-cron', label: 'Cron Scheduler', status: 'online', tooltip: 'Automated scheduled tasks: daily log compilation, RSVP deadline checks, security audits, news digests, tech discovery (Monday), weekly stats (Sunday), memindex sync (every 6h). Runs via heartbeat system.' },
       { id: 'oc-memory', label: 'Memory Files', status: 'online', tooltip: 'Persistent memory layer: MEMORY.md (curated long-term knowledge), memory/*.md (daily notes), AGENTS.md (behavioural rules), SOUL.md (personality/values), USER.md (user preferences). Loaded every session.' },
@@ -143,6 +144,7 @@ export const systemNodes = [
 
 export const systemEdges = [
   { id: 'e-oc-telegram', source: 'borgella', target: 'telegram-ext', label: 'Messages', tooltip: 'Bidirectional message flow. User sends messages via Telegram, agent responds. Supports text, voice (transcribed), images, and inline buttons.', animated: true },
+  { id: 'e-oc-slack', source: 'borgella', target: 'slack-ext', label: 'Slack messages', tooltip: 'The borgella-slack agent handles Slack messages via isolated sessions. Scoped access ensures private context never leaks into shared channels.', animated: true },
   { id: 'e-oc-lg', source: 'borgella', target: 'langgraph', label: 'Task delegation', tooltip: 'Borgella can delegate complex multi-step tasks to the LangGraph orchestrator, which routes them to specialist agents. Supplementary to the primary Claude Code orchestration pipeline.' },
   { id: 'e-oc-kb', source: 'borgella', target: 'kanban', label: 'API calls', tooltip: 'Borgella reads and writes kanban tasks via REST API. Creates tasks, adds comments, moves items through workflow columns, and tracks progress.' },
   { id: 'e-oc-mac', source: 'borgella', target: 'mac', label: 'Node control', tooltip: 'Borgella executes commands on the Mac via node control protocol over Tailscale. Accesses Google tools, local CLIs, and file system.' },
@@ -164,7 +166,8 @@ export const systemEdges = [
 
 // External service nodes (not expandable)
 export const externalNodes = [
-  { id: 'telegram-ext', label: 'Telegram', icon: '💬', position: { x: 30, y: 30 }, tooltip: 'Telegram messaging platform. The user-facing interface for all interactions with the AI assistant. Chosen for its rich bot API, inline buttons, and cross-platform availability.' },
+  { id: 'telegram-ext', label: 'Telegram', icon: '💬', position: { x: 30, y: 30 }, tooltip: 'Telegram messaging platform. The primary user-facing interface for all interactions with Borgella. Chosen for its rich bot API, inline buttons, and cross-platform availability.' },
+  { id: 'slack-ext', label: 'Slack', icon: '💼', position: { x: 30, y: 130 }, tooltip: 'Measurelab Slack workspace (The Bridge). The borgella-slack agent operates here with scoped access, participating in team conversations without exposing private context.' },
   { id: 'github-ext', label: 'GitHub', icon: '🐙', position: { x: 30, y: 220 }, tooltip: 'GitHub repository hosting the Obsidian vault and project repos (kanban board, voice chat, system diagram). Acts as the central sync point.' },
   { id: 'supabase-ext', label: 'Supabase', icon: '⚡', position: { x: 1350, y: 30 }, tooltip: 'Supabase provides the PostgreSQL database and realtime subscriptions for the Kanban board. Hosted service — no database management needed.' },
   { id: 'vercel-ext', label: 'Vercel', icon: '▲', position: { x: 1350, y: 200 }, tooltip: 'Vercel hosts the Kanban board and Voice Chat applications. Provides edge deployment, automatic previews, and CI/CD. Deploy hooks used as workaround for broken auto-deploy webhooks.' },
