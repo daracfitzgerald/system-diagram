@@ -39,7 +39,7 @@ export const systemNodes = [
   },
   {
     id: 'kanban',
-    label: 'Kanban Board',
+    label: 'Borg Kanban',
     subtitle: 'Vercel + Supabase',
     status: 'online',
     tooltip: 'A custom-built task management board deployed on Vercel. Both Dara and the AI agents use it to track work. Provides visibility into what\'s planned, in progress, and done.',
